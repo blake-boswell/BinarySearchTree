@@ -1,5 +1,6 @@
 //
 // Created by blake on 3/3/2018.
+// Implementation of the BinarySearchTree using recursive functions
 //
 #include "BinarySearchTree.h"
 #include <iostream>
@@ -8,8 +9,8 @@ using namespace std;
 
 BinarySearchTree::BinarySearchTree(int data) {
     this->data = data;
-    this->left = nullptr;
-    this->right = nullptr;
+    this->left = NULL;
+    this->right = NULL;
 }
 
 /**
@@ -18,9 +19,9 @@ BinarySearchTree::BinarySearchTree(int data) {
  * @return BinarySearchTree
  */
 BinarySearchTree* BinarySearchTree::search(int key) {
-    if(this == nullptr) {
+    if(this == NULL) {
         // Tree is empty
-        return nullptr;
+        return NULL;
     }
     if(this->data == key) {
         // Found the node
@@ -42,10 +43,10 @@ BinarySearchTree* BinarySearchTree::search(int key) {
  * @return True if successful, False otherwise
  */
 bool BinarySearchTree::insert(BinarySearchTree* &root, int key) {
-    if(root == nullptr) {
+    if(root == NULL) {
         root = new BinarySearchTree(key);
-        root->left = nullptr;
-        root->right = nullptr;
+        root->left = NULL;
+        root->right = NULL;
         return true;
     }
     if(this->data == key) {
@@ -77,16 +78,16 @@ void BinarySearchTree::removeBoth(BinarySearchTree* &root) {
  * @param root
  */
 void BinarySearchTree::removeNode(BinarySearchTree* & root) {
-    if(root->left == nullptr && root->right == nullptr) {
+    if(root->left == NULL && root->right == NULL) {
         // Leaf node
         delete root;
-        root = nullptr;
-    } else if(root->left == nullptr) {
+        root = NULL;
+    } else if(root->left == NULL) {
         // Single child on the right
         BinarySearchTree* temp = root;
         root = root->right;
         delete temp;
-    } else if(root->right == nullptr) {
+    } else if(root->right == NULL) {
         // Single child on the left
         BinarySearchTree* temp = root;
         root = root->left;
@@ -103,7 +104,7 @@ void BinarySearchTree::removeNode(BinarySearchTree* & root) {
  * @return True if successful, False otherwise
  */
 bool BinarySearchTree::remove(BinarySearchTree* &root, int key) {
-    if(root == nullptr) {
+    if(root == NULL) {
         return false;
     }
     if(root->data == key) {
@@ -119,7 +120,7 @@ bool BinarySearchTree::remove(BinarySearchTree* &root, int key) {
  * Prints the tree in Inorder
  */
 void BinarySearchTree::showInorder() {
-    if(this == nullptr) {
+    if(this == NULL) {
         return;
     }
     this->left->showInorder();
@@ -132,7 +133,7 @@ void BinarySearchTree::showInorder() {
  * Prints the tree in Postorder
  */
 void BinarySearchTree::showPostorder() {
-    if(this == nullptr) {
+    if(this == NULL) {
         return;
     }
     this->left->showPostorder();
@@ -156,7 +157,7 @@ void BinarySearchTree::show() {
  * @return height
  */
 int BinarySearchTree::height() {
-    if(this == nullptr) {
+    if(this == NULL) {
         return 0;
     }
     return 1 + max(this->left->height(), this->right->height());
@@ -168,7 +169,7 @@ int BinarySearchTree::height() {
  * @return size
  */
 int BinarySearchTree::sizeHelper(int& size) {
-    if(this == nullptr) {
+    if(this == NULL) {
         return size;
     }
     size++;
@@ -192,13 +193,13 @@ int BinarySearchTree::size() {
  * @return T/F
  */
 bool BinarySearchTree::check() {
-    if(this == nullptr) {
+    if(this == NULL) {
         return true;
     }
-    if(this->left == nullptr && this->right != nullptr) {
+    if(this->left == NULL && this->right != NULL) {
         return (this->data < this->right->data);
     }
-    if(this->left != nullptr && this->right == nullptr) {
+    if(this->left != NULL && this->right == NULL) {
         return (this->data > this->left->data);
     }
     if(this->left->check() == false || this->right->check() == false) {

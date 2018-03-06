@@ -1,11 +1,14 @@
+// Author: Blake Boswell
+// Synopsis: This file is used to test out the BinarySearchTree class
+
 #include <iostream>
+#include <stdlib.h>
 #include <ctime>
 #include "BinarySearchTree.h"
 
 using namespace std;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
     BinarySearchTree* tree = new BinarySearchTree(5);
     BinarySearchTree* result;
     // tree->show();
@@ -53,7 +56,7 @@ int main() {
     cout << "isTree?: " << tree->check() << endl;
 
     // Empirical study
-    cout << "Empirical Study" << endl;
+    cout << "\n\nEmpirical Study\n\n" << endl;
 
     int count = 1;
     srand(time(NULL));
