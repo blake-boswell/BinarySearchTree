@@ -15,7 +15,7 @@ BinarySearchTree::BinarySearchTree(int data) {
 /**
  * Returns the node with data equal to the given key
  * @param key
- * @return Node
+ * @return BinarySearchTree
  */
 BinarySearchTree* BinarySearchTree::search(int key) {
     if(this == nullptr) {
