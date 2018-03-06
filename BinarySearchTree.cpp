@@ -12,33 +12,43 @@ BinarySearchTree::BinarySearchTree(int data) {
     this->right = nullptr;
 }
 
-BinarySearchTree* BinarySearchTree::search(BinarySearchTree* root, int key) {
-    if(root == nullptr) {
+/**
+ * Returns the node with data equal to the given key
+ * @param key
+ * @return Node
+ */
+BinarySearchTree* BinarySearchTree::search(int key) {
+    if(this == nullptr) {
         // Tree is empty
         return nullptr;
     }
-    if(root->data == key) {
+    if(this->data == key) {
         // Found the node
-        return root;
+        return this;
     }
-    if(root->data > key) {
+    if(this->data > key) {
         // Go down the left subtree
-        return search(root->left, key);
+        return this->left->search(key);
     } else {
         // Go down the right subtree
-        return search(root->right, key);
+        return this->right->search(key);
     }
 }
 
+/**
+ * Inserts a new node into the tree with data equal to the key
+ * @param root
+ * @param key
+ * @return True if successful, False otherwise
+ */
 bool BinarySearchTree::insert(BinarySearchTree* &root, int key) {
     if(root == nullptr) {
-        root = new BinarySearchTree(-1);
-        root->data = key;
+        root = new BinarySearchTree(key);
         root->left = nullptr;
         root->right = nullptr;
         return true;
     }
-    if(root->data == key) {
+    if(this->data == key) {
         // Data already exists
         return false;
     }
@@ -51,6 +61,10 @@ bool BinarySearchTree::insert(BinarySearchTree* &root, int key) {
     }
 }
 
+/**
+ * Remove a node that has 2 children
+ * @param root
+ */
 void BinarySearchTree::removeBoth(BinarySearchTree* &root) {
     BinarySearchTree* temp = root;
     root = root->right;
@@ -58,6 +72,10 @@ void BinarySearchTree::removeBoth(BinarySearchTree* &root) {
     delete temp;
 }
 
+/**
+ * Remove a node that has only 1 child
+ * @param root
+ */
 void BinarySearchTree::removeNode(BinarySearchTree* & root) {
     if(root->left == nullptr && root->right == nullptr) {
         // Leaf node
@@ -78,6 +96,12 @@ void BinarySearchTree::removeNode(BinarySearchTree* & root) {
     }
 }
 
+/**
+ * Remove a node with data equal to the given key
+ * @param root
+ * @param key
+ * @return True if successful, False otherwise
+ */
 bool BinarySearchTree::remove(BinarySearchTree* &root, int key) {
     if(root == nullptr) {
         return false;
@@ -91,16 +115,46 @@ bool BinarySearchTree::remove(BinarySearchTree* &root, int key) {
     }
 }
 
-void BinarySearchTree::show() {
+/**
+ * Prints the tree in Inorder
+ */
+void BinarySearchTree::showInorder() {
     if(this == nullptr) {
         return;
     }
-    this->left->show();
+    this->left->showInorder();
     cout << this->data << ", ";
-    this->right->show();
+    this->right->showInorder();
 
 }
 
+/**
+ * Prints the tree in Postorder
+ */
+void BinarySearchTree::showPostorder() {
+    if(this == nullptr) {
+        return;
+    }
+    this->left->showPostorder();
+    this->right->showPostorder();
+    cout << this->data << ", ";
+}
+
+/**
+ * Print out both the Inorder and Postorder of the tree
+ */
+void BinarySearchTree::show() {
+    cout << "Inorder:\n";
+    this->showInorder();
+    cout << "\nPostOrder:\n";
+    this->showPostorder();
+    cout << "\n";
+}
+
+/**
+ * Finds the height of the tree
+ * @return height
+ */
 int BinarySearchTree::height() {
     if(this == nullptr) {
         return 0;
@@ -108,6 +162,11 @@ int BinarySearchTree::height() {
     return 1 + max(this->left->height(), this->right->height());
 }
 
+/**
+ * Helper function to size
+ * @param size
+ * @return size
+ */
 int BinarySearchTree::sizeHelper(int& size) {
     if(this == nullptr) {
         return size;
@@ -118,15 +177,20 @@ int BinarySearchTree::sizeHelper(int& size) {
     return size;
 }
 
+/**
+ * Finds the total number of nodes in the tree
+ * @return size
+ */
 int BinarySearchTree::size() {
     int size = 0;
     return sizeHelper(size);
 }
 
-bool checkNodes(BinarySearchTree* left, BinarySearchTree* right) {
-
-}
-
+/**
+ * Checks that the tree is a Binary Search Tree
+ * left data < node data < right data
+ * @return T/F
+ */
 bool BinarySearchTree::check() {
     if(this == nullptr) {
         return true;
@@ -144,6 +208,10 @@ bool BinarySearchTree::check() {
     }
 }
 
+/**
+ * Function for debugging the check function
+ * @param data
+ */
 void BinarySearchTree::setData(int data) {
     this->data = data;
 }

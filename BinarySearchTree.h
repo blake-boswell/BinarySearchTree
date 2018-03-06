@@ -9,18 +9,21 @@ private:
     BinarySearchTree* right;
 
     int sizeHelper(int& size);
+    void removeBoth(BinarySearchTree* &root);
+    void removeNode(BinarySearchTree* &root);
+    void showInorder();
+    void showPostorder();
 
 public:
     explicit BinarySearchTree(int data);
-    BinarySearchTree* search(BinarySearchTree* root, int key);
+    BinarySearchTree* search(int key);
     bool insert(BinarySearchTree* &root, int key);
-    void removeBoth(BinarySearchTree* &root);
-    void removeNode(BinarySearchTree* &root);
     bool remove(BinarySearchTree* &root, int key);
     void show();
-
     int height();
     int size();
     bool check();
+
+    // For debugging only
     void setData(int data);
 };

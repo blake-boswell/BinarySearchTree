@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 #include "BinarySearchTree.h"
 
 using namespace std;
@@ -20,35 +21,57 @@ int main() {
     cout << "Height: " << tree->height() << endl;
     cout << "isTree?: " << tree->check() << endl;
     tree->show();
-    cout << endl;
     tree->remove(tree, 2);
+    cout << "Removing 2" << endl;
     cout << "Size: " << tree->size() << endl;
     cout << "Height: " << tree->height() << endl;
     cout << "isTree?: " << tree->check() << endl;
     tree->show();
-    cout << endl;
     tree->remove(tree, 1);
+    cout << "Removing 1" << endl;
     cout << "Size: " << tree->size() << endl;
     cout << "Height: " << tree->height() << endl;
     cout << "isTree?: " << tree->check() << endl;
     tree->show();
-    cout << endl;
     tree->remove(tree, 8);
+    cout << "Removing 8" << endl;
     cout << "Size: " << tree->size() << endl;
     cout << "Height: " << tree->height() << endl;
     cout << "isTree?: " << tree->check() << endl;
     tree->show();
-    cout << endl;
     tree->remove(tree, 7);
+    cout << "Removing 7" << endl;
     cout << "Size: " << tree->size() << endl;
     cout << "Height: " << tree->height() << endl;
     cout << "isTree?: " << tree->check() << endl;
     tree->show();
-    cout << endl;
-    tree->search(tree, 6)->setData(10);
+    tree->search(6)->setData(10);
+    cout << "Set 6 to 10, to test the check function out" << endl;
+    tree->show();
     cout << "Size: " << tree->size() << endl;
     cout << "Height: " << tree->height() << endl;
     cout << "isTree?: " << tree->check() << endl;
-//    tree->search(tree, 1);
+
+    // Empirical study
+    cout << "Empirical Study" << endl;
+
+    int count = 1;
+    srand(time(NULL));
+    BinarySearchTree* test = new BinarySearchTree(rand() % 1000000);
+
+    clock_t start;
+    double duration;
+    start = clock();
+
+    while(count < 1000000) {
+        // cout << count << endl;
+        if(test->insert(test, rand())) {
+            count++;
+        }
+    }
+    duration = (clock() - start) / (double) CLOCKS_PER_SEC;
+    cout << "Size: " << test->size() << endl;
+    cout << duration << " seconds to insert " << count << " nodes!" << endl;
+
     return 0;
 }
