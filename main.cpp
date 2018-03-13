@@ -9,46 +9,46 @@
 using namespace std;
 
 int main() {
-    BinarySearchTree* tree = new BinarySearchTree(5);
+    BinarySearchTree* tree = new BinarySearchTree();
     BinarySearchTree* result;
     // tree->show();
-    tree->insert(tree, 3);
-    tree->insert(tree, 4);
-    tree->insert(tree, 2);
-    tree->insert(tree, 1);
-    tree->insert(tree, 7);
-    tree->insert(tree, 6);
-    tree->insert(tree, 8);
-    tree->insert(tree, 9);
+    tree->insert(3);
+    tree->insert(4);
+    tree->insert(2);
+    tree->insert(1);
+    tree->insert(7);
+    tree->insert(6);
+    tree->insert(8);
+    tree->insert(9);
     cout << "Size: " << tree->size() << endl;
     cout << "Height: " << tree->height() << endl;
     cout << "isTree?: " << tree->check() << endl;
     tree->show();
-    tree->remove(tree, 2);
+    tree->remove(2);
     cout << "Removing 2" << endl;
     cout << "Size: " << tree->size() << endl;
     cout << "Height: " << tree->height() << endl;
     cout << "isTree?: " << tree->check() << endl;
     tree->show();
-    tree->remove(tree, 1);
+    tree->remove(1);
     cout << "Removing 1" << endl;
     cout << "Size: " << tree->size() << endl;
     cout << "Height: " << tree->height() << endl;
     cout << "isTree?: " << tree->check() << endl;
     tree->show();
-    tree->remove(tree, 8);
+    tree->remove(8);
     cout << "Removing 8" << endl;
     cout << "Size: " << tree->size() << endl;
     cout << "Height: " << tree->height() << endl;
     cout << "isTree?: " << tree->check() << endl;
     tree->show();
-    tree->remove(tree, 7);
+    tree->remove(7);
     cout << "Removing 7" << endl;
     cout << "Size: " << tree->size() << endl;
     cout << "Height: " << tree->height() << endl;
     cout << "isTree?: " << tree->check() << endl;
     tree->show();
-    tree->search(6)->setData(10);
+    tree->search(6)->data = 10;
     cout << "Set 6 to 10, to test the check function out" << endl;
     tree->show();
     cout << "Size: " << tree->size() << endl;
@@ -58,17 +58,18 @@ int main() {
     // Empirical study
     cout << "\n\nEmpirical Study\n\n" << endl;
 
-    int count = 1;
+    int count = 0;
+    const int numInserts = 1000000;
     srand(time(NULL));
-    BinarySearchTree* test = new BinarySearchTree(rand() % 1000000);
+    BinarySearchTree* test = new BinarySearchTree();
 
     clock_t start;
     double duration;
     start = clock();
 
-    while(count < 1000000) {
+    while(count < numInserts) {
         // cout << count << endl;
-        if(test->insert(test, rand())) {
+        if(test->insert((count * rand()) % (numInserts * 10))) {
             count++;
         }
     }
